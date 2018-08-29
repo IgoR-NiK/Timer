@@ -20,16 +20,16 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
         <Style x:Key="Clock" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="70" />
+            <Setter Property="FontSize" Value="75" />
             <Setter Property="VerticalAlignment" Value="Bottom" />
             <Setter Property="HorizontalAlignment" Value="Center" />            
         </Style>
         <Style x:Key="Separator" TargetType="TextBlock">
             <Setter Property="Text" Value=":" />
-            <Setter Property="FontSize" Value="70" />
+            <Setter Property="FontSize" Value="75" />
             <Setter Property="VerticalAlignment" Value="Bottom" />
             <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="10 0 10 5" />
+            <Setter Property="Margin" Value="10 0 10 7" />
         </Style>
         <Style x:Key="Label" TargetType="TextBlock">            
             <Setter Property="FontSize" Value="20" />
@@ -119,22 +119,22 @@
                            Grid.Row="0"
                            Grid.Column="6" />
 
-                <TextBlock Text="Дней"
+                <TextBlock Text="{Binding DaysLabel}"
                            Style="{StaticResource Label}"    
                            Visibility="{Binding DaysVisible, Converter={StaticResource boolToVisibilityConverter}}"
                            Grid.Row="1"
                            Grid.Column="0" />
-                <TextBlock Text="Часов"
+                <TextBlock Text="{Binding HoursLabel}"
                            Style="{StaticResource Label}" 
                            Visibility="{Binding HoursVisible, Converter={StaticResource boolToVisibilityConverter}}"
                            Grid.Row="1"
                            Grid.Column="2" />
-                <TextBlock Text="Минут"
+                <TextBlock Text="{Binding MinutesLabel}"
                            Style="{StaticResource Label}" 
                            Visibility="{Binding MinutesVisible, Converter={StaticResource boolToVisibilityConverter}}"
                            Grid.Row="1"
                            Grid.Column="4" />
-                <TextBlock Text="Секунд"
+                <TextBlock Text="{Binding SecondsLabel}"
                            Style="{StaticResource Label}" 
                            Visibility="{Binding SecondsVisible, Converter={StaticResource boolToVisibilityConverter}}"
                            Grid.Row="1"

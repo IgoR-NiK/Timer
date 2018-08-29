@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\DeclensionHelper.cs" />
     <Compile Include="ViewModels\CountDownVM.cs" />
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
