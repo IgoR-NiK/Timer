@@ -13,11 +13,12 @@ namespace Timer.ViewModels
 {
     class CountDownVM : BaseVM
     {
-        DateTime EndDate { get; } = new DateTime(2018, 8, 31);
+        DateTime EndDate { get; set; } 
 
         public CountDownVM()
         {
-            Title = "До защиты диплома осталось:";
+            Title = Properties.Settings.Default.Title;
+            EndDate = Properties.Settings.Default.EndDate;
 
             var timer = new DispatcherTimer();
             timer.Tick += timer_Tick;

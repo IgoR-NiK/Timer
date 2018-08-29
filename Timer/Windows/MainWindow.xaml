@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         MouseMove="Window_MouseMove"
-        MouseDown="Window_MouseDown">
+        MouseDown="Window_MouseDown"
+        Closing="Window_Closing">
 
     <Window.Resources>
         <Style x:Key="Title" TargetType="TextBlock">
