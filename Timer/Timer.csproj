@@ -112,5 +112,8 @@
   <ItemGroup>
     <Resource Include="Images\CloseDark.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Settings.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
