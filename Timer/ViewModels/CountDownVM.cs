@@ -11,7 +11,7 @@ using Timer.Helpers;
 
 namespace Timer.ViewModels
 {
-    class CountDownVM : INotifyPropertyChanged
+    class CountDownVM : BaseVM
     {
         DateTime EndDate { get; } = new DateTime(2018, 8, 31);
 
@@ -23,20 +23,6 @@ namespace Timer.ViewModels
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(500000);
             timer.Start();
-        }
-
-        private string title;
-        public string Title
-        {
-            get => title;
-            set
-            {
-                if (title != value)
-                {
-                    title = value;
-                    OnPropertyChanged();
-                }
-            }
         }
 
         private int days;
@@ -113,13 +99,6 @@ namespace Timer.ViewModels
             Hours = delta.Hours;
             Minutes = delta.Minutes;
             Seconds = delta.Seconds;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
