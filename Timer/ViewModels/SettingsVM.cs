@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Timer.Commands;
+using Timer.ViewNavigation;
+
 namespace Timer.ViewModels
 {
     class SettingsVM : BaseVM
@@ -15,7 +18,24 @@ namespace Timer.ViewModels
         public SettingsVM()
         {
             Title = "Настройки";
-            EndDate = DateTime.Now;
+
+            Label = Properties.Settings.Default.Title;
+            EndDate = Properties.Settings.Default.EndDate;
         }
+
+        public RelayCommand OkClick { get; } = new RelayCommand(() =>
+        {
+            ViewNavigator.Instance.CloseLastView();
+        });
+
+        public RelayCommand GoBackClick { get; } = new RelayCommand(() =>
+        {
+            ViewNavigator.Instance.CloseLastView(false);
+        });
+
+        public RelayCommand CloseClick { get; } = new RelayCommand(() =>
+        {
+            ViewNavigator.Instance.CloseAllViews();
+        });
     }
 }

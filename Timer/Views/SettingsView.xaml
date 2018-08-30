@@ -3,43 +3,106 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                 xmlns:local="clr-namespace:Timer.Views"
                 mc:Ignorable="d" 
                 d:DesignHeight="450" d:DesignWidth="800">
+    
     <UserControl.Resources>
-        <Style x:Key="Label" TargetType="TextBlock">
+        <Style x:Key="Image" TargetType="Image">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style x:Key="Title" TargetType="TextBlock">
             <Setter Property="FontSize" Value="25" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
+        <Style x:Key="Label" TargetType="TextBlock" BasedOn="{StaticResource Title}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="0 15" />
+        </Style>
+        <Style x:Key="Input" TargetType="TextBox">
+            <Setter Property="Margin" Value="0 15" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        
     </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="75" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Подпись: "
-                           Style="{StaticResource Label}"                            
-                           Grid.Row="0"
-                           Grid.Column="0" />
-        <TextBox Text="{Binding Title}" 
-                         Grid.Row="0"
-                         Grid.Column="1"/>
-        <TextBlock Text="Дата события: "
-                           Style="{StaticResource Label}"                            
-                           Grid.Row="1"
-                           Grid.Column="0" />
+        <Image Source="pack://application:,,,/Images/Arrow.png" 
+               HorizontalAlignment="Left" 
+               Style="{StaticResource Image}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding Path=GoBackClick}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Image>
 
-        <DatePickerTextBox Text="{Binding EndDate}"
-                            Grid.Row="1"
-                            Grid.Column="1" />
+        <TextBlock Text="{Binding Title}"
+                   Style="{StaticResource Title}" />     
+        
+        <Image Source="pack://application:,,,/Images/Close.png" 
+               HorizontalAlignment="Right" 
+               Style="{StaticResource Image}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding Path=CloseClick}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Image>
 
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="15" />
+            </Grid.ColumnDefinitions>
 
+            <TextBlock Text="Подпись: "
+                       Style="{StaticResource Label}"   
+                       Grid.Row="0"
+                       Grid.Column="1" />
+            <TextBox Text="{Binding Label}" 
+                     Style="{StaticResource Input}"
+                     Grid.Row="0"
+                     Grid.Column="2"/>
+            <TextBlock Text="Дата события: "
+                       Style="{StaticResource Label}"  
+                       Grid.Row="1"
+                       Grid.Column="1" />
+            <DatePickerTextBox Text="{Binding EndDate}"
+                               Style="{StaticResource Input}"
+                               Grid.Row="1"
+                               Grid.Column="2" />
+
+            <Button Content="Ок"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Width="70"
+                    HorizontalAlignment="Right"
+                    Margin="0 0 0 10"                    
+                    Background="WhiteSmoke"
+                    FontSize="15"
+                    Cursor="Hand"
+                    Command="{Binding OkClick}" />
+
+        </Grid>
     </Grid>
 </local:BaseView>

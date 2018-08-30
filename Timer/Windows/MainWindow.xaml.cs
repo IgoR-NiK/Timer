@@ -29,8 +29,8 @@ namespace Timer.Windows
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                // TODO : анализировать текстовые поля для ввода
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                !(e.OriginalSource is TextBox))
             {
                 var deltaPos = e.GetPosition(this) - moveStart;
                 Left += deltaPos.X;
