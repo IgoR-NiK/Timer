@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace Timer.ViewModels
 {
-    class BaseVM : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
         private string title;
         public string Title
@@ -24,6 +24,8 @@ namespace Timer.ViewModels
                 }
             }
         }
+
+        public Func<BaseVM, bool> AfterViewClosed { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

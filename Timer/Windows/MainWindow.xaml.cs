@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Timer.ViewModels;
-
 namespace Timer.Windows
 {
     /// <summary>
@@ -25,8 +23,6 @@ namespace Timer.Windows
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new CountDownVM();
         }
 
         Point moveStart;
@@ -34,6 +30,7 @@ namespace Timer.Windows
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+                // TODO : анализировать текстовые поля для ввода
             {
                 var deltaPos = e.GetPosition(this) - moveStart;
                 Left += deltaPos.X;
@@ -47,11 +44,6 @@ namespace Timer.Windows
             {
                 moveStart = e.GetPosition(this);
             }
-        }
-
-        private void btnClose_Click(object sender, MouseButtonEventArgs e)
-        {
-            Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

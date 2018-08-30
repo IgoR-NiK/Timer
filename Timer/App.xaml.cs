@@ -6,7 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-using Timer.Windows;
+using Timer.ViewNavigation;
+using Timer.ViewModels;
 
 namespace Timer
 {
@@ -19,8 +20,7 @@ namespace Timer
         {
             base.OnStartup(e);
 
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
+            ViewNavigator.Instance.NavigateTo(new CountDownVM());
         }
     }
 }

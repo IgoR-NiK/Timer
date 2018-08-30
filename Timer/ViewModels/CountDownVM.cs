@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
+using Timer.Commands;
 using Timer.Helpers;
+using Timer.ViewNavigation;
 
 namespace Timer.ViewModels
 {
     class CountDownVM : BaseVM
     {
-        DateTime EndDate { get; set; } 
+        public DateTime EndDate { get; set; } 
 
         public CountDownVM()
         {
@@ -24,6 +26,17 @@ namespace Timer.ViewModels
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(500000);
             timer.Start();
+
+            SettingsClick = new RelayCommand(() =>
+            {
+                ViewNavigator.Instance.NavigateTo(new SettingsVM(), viewModel =>
+                {
+                    Properties.Settings.Default.Title = Title = ((SettingsVM)viewModel).Label;
+                    Properties.Settings.Default.EndDate = EndDate = ((SettingsVM)viewModel).EndDate;
+
+                    return true;
+                });
+            });
         }
 
         private int days;
@@ -101,5 +114,12 @@ namespace Timer.ViewModels
             Minutes = delta.Minutes;
             Seconds = delta.Seconds;
         }
+
+        public RelayCommand SettingsClick { get; }
+
+        public RelayCommand CloseClick { get; } = new RelayCommand(() =>
+        {
+            ViewNavigator.Instance.CloseAllViews();
+        });
     }
 }
