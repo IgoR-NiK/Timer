@@ -18,7 +18,7 @@ namespace Timer.Views
     /// <summary>
     /// Логика взаимодействия для CountDownView.xaml
     /// </summary>
-    public partial class CountDownView : BaseView
+    public partial class CountDownView
     {
         public CountDownView()
         {

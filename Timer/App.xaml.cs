@@ -6,8 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-using Timer.ViewNavigation;
 using Timer.ViewModels;
+using Timer.Windows;
+using MVVMAqua;
 
 namespace Timer
 {
@@ -18,9 +19,12 @@ namespace Timer
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
-            ViewNavigator.Instance.NavigateTo(new CountDownVM());
-        }
-    }
+			var bootstrapper = new Bootstrapper();
+			bootstrapper.OpenNewWindow(new MainWindow(), new CountDownVM(), _ =>
+			{
+				Timer.Properties.Settings.Default.Save();
+				return true;
+			});
+		}
+	}
 }

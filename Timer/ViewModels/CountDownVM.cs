@@ -7,88 +7,81 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-using Timer.Commands;
 using Timer.Helpers;
-using Timer.ViewNavigation;
+using MVVMAqua.Commands;
+using MVVMAqua.ViewModels;
 
 namespace Timer.ViewModels
 {
     class CountDownVM : BaseVM
     {
-        public DateTime EndDate { get; set; } 
+        public DateTime EndDate { get; set; }
 
-        public CountDownVM()
+		public RelayCommand CloseClick { get; }
+		public RelayCommand SettingsClick { get; }
+
+		public CountDownVM()
         {
-            Title = Properties.Settings.Default.Title;
+            WindowTitle = Properties.Settings.Default.Title;
             EndDate = Properties.Settings.Default.EndDate;
 
-            var timer = new DispatcherTimer();
+			var timer = new DispatcherTimer();
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(500000);
             timer.Start();
 
-            SettingsClick = new RelayCommand(() =>
+			CloseClick = new RelayCommand(() => ViewNavigator.CloseAllViews());
+            SettingsClick = new RelayCommand(() => ViewNavigator.NavigateTo(new SettingsVM(), viewModel =>			
             {
-                ViewNavigator.Instance.NavigateTo(new SettingsVM(), viewModel =>
-                {
-                    Properties.Settings.Default.Title = Title = ((SettingsVM)viewModel).Label;
-                    Properties.Settings.Default.EndDate = EndDate = ((SettingsVM)viewModel).EndDate;
+                Properties.Settings.Default.Title = WindowTitle = viewModel.Label;
+                Properties.Settings.Default.EndDate = EndDate = viewModel.EndDate;
 
-                    return true;
-                });
-            });
+                return true;
+            }));
         }
 
         private int days;
         public int Days
         {
             get => days;
-            set
-            {
-                days = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(DaysVisible));
-                OnPropertyChanged(nameof(DaysLabel));
-            }
+			set => SetProperty(ref days, value, () => 
+			{
+				OnPropertyChanged(nameof(DaysVisible));
+				OnPropertyChanged(nameof(DaysLabel));
+			});
         }
         
         private int hours;
         public int Hours
         {
             get => hours;
-            set
-            {
-                hours = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(HoursVisible));
-                OnPropertyChanged(nameof(HoursLabel));
-            }
+			set => SetProperty(ref hours, value, () => 
+			{
+				OnPropertyChanged(nameof(HoursVisible));
+				OnPropertyChanged(nameof(HoursLabel));
+			});
         }
 
         private int minutes;
         public int Minutes
         {
             get => minutes;
-            set
-            {
-                minutes = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(MinutesVisible));
-                OnPropertyChanged(nameof(MinutesLabel));
-            }
+			set => SetProperty(ref minutes, value, () => 
+			{
+				OnPropertyChanged(nameof(MinutesVisible));
+				OnPropertyChanged(nameof(MinutesLabel));
+			});
         }
 
         private int seconds;
         public int Seconds
         {
             get => seconds;
-            set
-            {
-                seconds = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(SecondsVisible));
-                OnPropertyChanged(nameof(SecondsLabel));
-            }
+			set => SetProperty(ref seconds, value, () =>
+			{
+				OnPropertyChanged(nameof(SecondsVisible));
+				OnPropertyChanged(nameof(SecondsLabel));
+			});
         }
 
         public bool DaysVisible => Days != 0;
@@ -114,12 +107,5 @@ namespace Timer.ViewModels
             Minutes = delta.Minutes;
             Seconds = delta.Seconds;
         }
-
-        public RelayCommand SettingsClick { get; }
-
-        public RelayCommand CloseClick { get; } = new RelayCommand(() =>
-        {
-            ViewNavigator.Instance.CloseAllViews();
-        });
     }
 }

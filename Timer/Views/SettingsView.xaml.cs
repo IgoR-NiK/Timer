@@ -18,7 +18,7 @@ namespace Timer.Views
     /// <summary>
     /// Логика взаимодействия для SettingsView.xaml
     /// </summary>
-    public partial class SettingsView : BaseView
+    public partial class SettingsView
     {
         public SettingsView()
         {
