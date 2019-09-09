@@ -27,7 +27,7 @@ namespace Timer.ViewModels
 
 			OkClick = new RelayCommand(() => ViewNavigator.CloseLastView());
 			GoBackClick = new RelayCommand(() => ViewNavigator.CloseLastView(false));
-			CloseClick = new RelayCommand(() => ViewNavigator.CloseAllViews());
+			CloseClick = new RelayCommand(() => ViewNavigator.CloseWindow());
 		}
     }
 }

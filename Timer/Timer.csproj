@@ -42,8 +42,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="MVVMAqua, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmAqua.1.2.0\lib\net47\MVVMAqua.dll</HintPath>
+    <Reference Include="MVVMAqua, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmAqua.1.5.0\lib\net45\MVVMAqua.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -30,13 +30,11 @@ namespace Timer.ViewModels
             timer.Interval = new TimeSpan(500000);
             timer.Start();
 
-			CloseClick = new RelayCommand(() => ViewNavigator.CloseAllViews());
-            SettingsClick = new RelayCommand(() => ViewNavigator.NavigateTo(new SettingsVM(), viewModel =>			
+			CloseClick = new RelayCommand(() => ViewNavigator.CloseWindow());
+            SettingsClick = new RelayCommand(() => ViewNavigator.NavigateTo(new SettingsVM(), null, viewModel =>			
             {
                 Properties.Settings.Default.Title = WindowTitle = viewModel.Label;
                 Properties.Settings.Default.EndDate = EndDate = viewModel.EndDate;
-
-                return true;
             }));
         }
 

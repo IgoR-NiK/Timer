@@ -19,12 +19,8 @@ namespace Timer
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-			var bootstrapper = new Bootstrapper();
-			bootstrapper.OpenNewWindow(new MainWindow(), new CountDownVM(), _ =>
-			{
-				Timer.Properties.Settings.Default.Save();
-				return true;
-			});
+			var bootstrapper = new BootstrapperBuilder().Build();
+			bootstrapper.OpenNewWindow(new MainWindow(), new CountDownVM(), null, null, null, _ => Timer.Properties.Settings.Default.Save());
 		}
 	}
 }
